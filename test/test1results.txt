@@ -1,0 +1,73 @@
+ # Account                                             EtherBalanceChange                          Token Name
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.000000000000000000           0.000000000000000000 Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.000000000000000000           0.000000000000000000 Deployer
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 User1
+ 3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 User2
+ 4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 User3
+ 5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 UI Fee Account
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+                                                                                    0.000000000000000000 Total Token Balances
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+
+
+---------- Deploy Group #1 - Factory ----------
+ # Account                                             EtherBalanceChange                          Token Name
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.005372585000000000           0.000000000000000000 Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.005372585000000000           0.000000000000000000 Deployer
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 User1
+ 3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 User2
+ 4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 User3
+ 5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 UI Fee Account
+ 6 0x57930444aa5c1e758c1407ded001a8f36aa80b1d        0.000000000000000000           0.000000000000000000 Factory
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+                                                                                    0.000000000000000000 Total Token Balances
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+
+PASS Deploy Group #1 - Factory - Factory
+factoryTx status=0x1 Success gas=4000000 gasUsed=1074517 costETH=0.005372585 costUSD=0.73018802735 @ ETH/USD=135.91 gasPrice=5 gwei block=970 txIx=0 txId=0xebf7d01fbd61b6454e28a3547a9a8119c7bc299abd28148bad8166d01520df2b @ 1554778034 Tue, 09 Apr 2019 02:47:14 UTC
+
+factoryContractAddress=0x57930444aa5c1e758c1407ded001a8f36aa80b1d
+factory.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
+factory.newOwner=0x0000000000000000000000000000000000000000
+factory.minimumFee=0.1 ETH
+factory.newAddress=0x0000000000000000000000000000000000000000
+factory.numberOfChildren=0
+
+---------- Deploy Group #1 - Deploy Auction ----------
+factoryContractAddress=0x57930444aa5c1e758c1407ded001a8f36aa80b1d
+get AuctionDeployed 0 #972 {"auction":"0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278","endDate":"1554784034","owner":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","ownerFee":"561728394500000000","reserve":"1000000000000000000","startDate":"1554778634","uiFee":"561728394500000000","uiFeeAccount":"0xa55a151eb00fded1634d27d1127b4be4627079ea"}
+auctionContract=#1 ["0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278"]
+ # Account                                             EtherBalanceChange                          Token Name
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.007651185000000000           0.000000000000000000 Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.556355809500000000           0.000000000000000000 Deployer
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976       -1.125735389000000000           0.000000000000000000 User1
+ 3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 User2
+ 4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 User3
+ 5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.561728394500000000           0.000000000000000000 UI Fee Account
+ 6 0x57930444aa5c1e758c1407ded001a8f36aa80b1d        0.000000000000000000           0.000000000000000000 Factory
+ 7 0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278        0.000000000000000000           0.000000000000000000 Auction start=Invalid Date, end=Invalid Date, reserve=1
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+                                                                                    0.000000000000000000 Total Token Balances
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+
+PASS Deploy Group #1 - Deploy Auction - Auction
+deployAuction_1Tx status=0x1 Success gas=2000000 gasUsed=455720 costETH=0.0022786 costUSD=0.309684526 @ ETH/USD=135.91 gasPrice=5 gwei block=972 txIx=0 txId=0x20aacabc335cb4c865ca3d81cc025d4d74e871fcd3942561ea48314c76c60703 @ 1554778036 Tue, 09 Apr 2019 02:47:16 UTC
+
+factoryContractAddress=0x57930444aa5c1e758c1407ded001a8f36aa80b1d
+factory.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
+factory.newOwner=0x0000000000000000000000000000000000000000
+factory.minimumFee=0.1 ETH
+factory.newAddress=0x0000000000000000000000000000000000000000
+factory.numberOfChildren=1
+factory.children(0)=0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278
+AuctionDeployed 0 #972 {"auction":"0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278","endDate":"1554784034","owner":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","ownerFee":"561728394500000000","reserve":"1000000000000000000","startDate":"1554778634","uiFee":"561728394500000000","uiFeeAccount":"0xa55a151eb00fded1634d27d1127b4be4627079ea"}
+
+auctionContractAddress=0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278
+auction.owner=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+auction.newOwner=0x0000000000000000000000000000000000000000
+auction.startDate=1554778634
+auction.endDate=1554784034
+
