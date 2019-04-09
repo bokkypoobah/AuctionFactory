@@ -422,8 +422,9 @@ function printAuctionContractDetails() {
     var contract = eth.contract(auctionContractAbi).at(auctionContractAddress);
     console.log("RESULT: auction.owner=" + contract.owner());
     console.log("RESULT: auction.newOwner=" + contract.newOwner());
-    console.log("RESULT: auction.startDate=" + contract.startDate());
-    console.log("RESULT: auction.endDate=" + contract.endDate());
+    console.log("RESULT: auction.token=" + getShortAddressName(contract.token()));
+    console.log("RESULT: auction.startDate=" + new Date(contract.startDate() * 1000).toString());
+    console.log("RESULT: auction.endDate=" + new Date(contract.endDate() * 1000).toString());
 
     var latestBlock = eth.blockNumber;
 

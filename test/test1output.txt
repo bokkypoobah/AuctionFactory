@@ -7,7 +7,18 @@ SOURCEDIR=../contracts/
 FACTORYNAME=AuctionFactory
 FACTORYSOL=AuctionFactory.sol
 FACTORYJS=AuctionFactory.js
-NAME=Auction
+
+AUCTIONNAME=Auction
+
+TOKENNAME=FixedSupplyToken
+TOKENSOL=test/FixedSupplyToken.sol
+TOKENJS=FixedSupplyToken.js
+
+SYMBOL=DAI
+NAME="Dai Stablecoin v1.0"
+DECIMALS=18
+TOTALSUPPLY=1000000
+
 
 DEPLOYMENTDATA=deploymentData.js
 
@@ -21,9 +32,9 @@ TEST3RESULTS=test3results.txt
 TEST4OUTPUT=test4output.txt
 TEST4RESULTS=test4results.txt
 
-CURRENTTIME = '1554778027' 'Tue Apr  9 12:47:07 2019'
-START_DATE  = '1554778072' 'Tue Apr  9 12:47:52 2019'
-END_DATE    = '1554778147' 'Tue Apr  9 12:49:07 2019'
+CURRENTTIME = '1554780661' 'Tue Apr  9 13:31:01 2019'
+START_DATE  = '1554780706' 'Tue Apr  9 13:31:46 2019'
+END_DATE    = '1554780781' 'Tue Apr  9 13:33:01 2019'
 --- Differences ../contracts//*.sol *.sol ---
 
 solc, the solidity compiler commandline interface
@@ -32,10 +43,12 @@ Welcome to the Geth JavaScript console!
 
 instance: Geth/v1.8.23-stable-c9427004/darwin-amd64/go1.11.5
 coinbase: 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e
-at block: 964 (Tue, 09 Apr 2019 12:47:08 AEST)
+at block: 3597 (Tue, 09 Apr 2019 13:31:02 AEST)
  datadir: /Users/bok/Projects/AuctionFactory/test/testchain
  modules: admin:1.0 clique:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 shh:1.0 txpool:1.0 web3:1.0
 
+> 
+true
 > 
 true
 > 
@@ -56,14 +69,19 @@ undefined
 > 
 undefined
 > 
-> 
-DATA: factoryAbi=[{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_minimumFee","type":"uint256"}],"name":"setMinimumFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"minimumFee","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"startDate","type":"uint256"},{"name":"endDate","type":"uint256"},{"name":"reserve","type":"uint256"},{"name":"uiFeeAccount","type":"address"}],"name":"deployAuctionContract","outputs":[{"name":"auction","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"numberOfChildren","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"children","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAddress","type":"address"}],"name":"deprecateFactory","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isChild","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_newAddress","type":"address"}],"name":"FactoryDeprecated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"oldFee","type":"uint256"},{"indexed":false,"name":"newFee","type":"uint256"}],"name":"MinimumFeeUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"auction","type":"address"},{"indexed":false,"name":"startDate","type":"uint256"},{"indexed":false,"name":"endDate","type":"uint256"},{"indexed":false,"name":"reserve","type":"uint256"},{"indexed":false,"name":"uiFeeAccount","type":"address"},{"indexed":false,"name":"ownerFee","type":"uint256"},{"indexed":false,"name":"uiFee","type":"uint256"}],"name":"AuctionDeployed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"}]
 undefined
 > 
-DATA: factoryBin="0x608060405267016345785d8a000060035534801561001c57600080fd5b506100303361003560201b61092d1760201c565b610074565b60005460ff161561004557600080fd5b6000805460ff196001600160a01b0390931661010002610100600160a81b031990911617919091166001179055565b610e55806100836000396000f3fe6080604052600436106100c25760003560e01c806379ba50971161007f578063d4ee1d9011610059578063d4ee1d9014610225578063de0946af1461023a578063f2fde38b1461026d578063fc91a897146102a0576100c2565b806379ba5097146101e65780638da5cb5b146101fb578063ccdb3f4514610210576100c2565b8063069c9fae146100c7578063182a7506146101025780631a7626e71461012c5780631ef3773314610153578063534349f5146101a75780637002ce42146101bc575b600080fd5b3480156100d357600080fd5b50610100600480360360408110156100ea57600080fd5b506001600160a01b0381351690602001356102e7565b005b34801561010e57600080fd5b506101006004803603602081101561012557600080fd5b5035610480565b34801561013857600080fd5b506101416104de565b60408051918252519081900360200190f35b61018b6004803603608081101561016957600080fd5b50803590602081013590604081013590606001356001600160a01b03166104e4565b604080516001600160a01b039092168252519081900360200190f35b3480156101b357600080fd5b50610141610752565b3480156101c857600080fd5b5061018b600480360360208110156101df57600080fd5b5035610758565b3480156101f257600080fd5b5061010061077f565b34801561020757600080fd5b5061018b61080b565b34801561021c57600080fd5b5061018b61081f565b34801561023157600080fd5b5061018b61082e565b34801561024657600080fd5b506101006004803603602081101561025d57600080fd5b50356001600160a01b031661083d565b34801561027957600080fd5b506101006004803603602081101561029057600080fd5b50356001600160a01b03166108cd565b3480156102ac57600080fd5b506102d3600480360360208110156102c357600080fd5b50356001600160a01b031661090b565b604080519115158252519081900360200190f35b60005461010090046001600160a01b0316331461030357600080fd5b6001600160a01b0382166103625760005461010090046001600160a01b03166108fc82156103315782610334565b30315b6040518115909202916000818181858888f1935050505015801561035c573d6000803e3d6000fd5b5061047c565b6000546001600160a01b038084169163a9059cbb9161010090910416831561038a5783610400565b60408051600160e01b6370a0823102815230600482015290516001600160a01b038716916370a08231916024808301926020929190829003018186803b1580156103d357600080fd5b505afa1580156103e7573d6000803e3d6000fd5b505050506040513d60208110156103fd57600080fd5b50515b6040518363ffffffff1660e01b815260040180836001600160a01b03166001600160a01b0316815260200182815260200192505050602060405180830381600087803b15801561044f57600080fd5b505af1158015610463573d6000803e3d6000fd5b505050506040513d602081101561047957600080fd5b50505b5050565b60005461010090046001600160a01b0316331461049c57600080fd5b600354604080519182526020820183905280517fcc2f49c6214278ae5862935eff953448e8e69118d10abfafaf63ea6aa35255cb9281900390910190a1600355565b60035481565b60006003543410156104f557600080fd5b4285101561050257600080fd5b84841161050e57600080fd5b60405161051a90610920565b604051809103906000f080158015610536573d6000803e3d6000fd5b5060408051600160e01b6398c36c0902815233600482015260248101889052604481018790526064810186905290519192506001600160a01b038316916398c36c099160848082019260009290919082900301818387803b15801561059a57600080fd5b505af11580156105ae573d6000803e3d6000fd5b5050506001600160a01b038083166000818152600460205260408120805460ff1916600190811790915560058054918201815582527f036b6384b5eca791c62761152d0c79bb0604c104a5fb6f4eb0703f3154bb3db00180546001600160a01b031916909217909155915081908416158061063b57506000546001600160a01b0385811661010090920416145b1561064b57506000905034610657565b60023404915081340390505b8115610695576040516001600160a01b0385169083156108fc029084906000818181858888f19350505050158015610693573d6000803e3d6000fd5b505b80156106da57600080546040516101009091046001600160a01b0316916108fc841502918491818181858888f193505050501580156106d8573d6000803e3d6000fd5b505b60005460408051898152602081018990528082018890526001600160a01b0387811660608301526080820185905260a082018690529151828716936101009004909216917f14f18f75f2b39b205549e7289a22d906f873c76fdfc200d4a131ed5c0747c22a9181900360c00190a35050949350505050565b60055490565b6005818154811061076557fe5b6000918252602090912001546001600160a01b0316905081565b6001546001600160a01b0316331461079657600080fd5b600154600080546040516001600160a01b0393841693610100909204909116917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a36001805460008054610100600160a81b0319166101006001600160a01b038416021790556001600160a01b0319169055565b60005461010090046001600160a01b031681565b6002546001600160a01b031681565b6001546001600160a01b031681565b60005461010090046001600160a01b0316331461085957600080fd5b6002546001600160a01b03161561086f57600080fd5b604080516001600160a01b038316815290517f0ac885cfcac9d1450e80f787dbf9546001fb50414106435b10b1d27b448b86689181900360200190a1600280546001600160a01b0319166001600160a01b0392909216919091179055565b60005461010090046001600160a01b031633146108e957600080fd5b600180546001600160a01b0319166001600160a01b0392909216919091179055565b60046020526000908152604090205460ff1681565b6104bd8061096d83390190565b60005460ff161561093d57600080fd5b6000805460ff196001600160a01b0390931661010002610100600160a81b03199091161791909116600117905556fe608060405234801561001057600080fd5b5061049d806100206000396000f3fe608060405234801561001057600080fd5b50600436106100935760003560e01c806398c36c091161006657806398c36c091461010c578063c24a0f8b14610144578063cd3293de1461014c578063d4ee1d9014610154578063f2fde38b1461015c57610093565b8063069c9fae146100985780630b97bc86146100c657806379ba5097146100e05780638da5cb5b146100e8575b600080fd5b6100c4600480360360408110156100ae57600080fd5b506001600160a01b038135169060200135610182565b005b6100ce61031b565b60408051918252519081900360200190f35b6100c4610321565b6100f06103ad565b604080516001600160a01b039092168252519081900360200190f35b6100c46004803603608081101561012257600080fd5b506001600160a01b0381351690602081013590604081013590606001356103c1565b6100ce6103d9565b6100ce6103df565b6100f06103e5565b6100c46004803603602081101561017257600080fd5b50356001600160a01b03166103f4565b60005461010090046001600160a01b0316331461019e57600080fd5b6001600160a01b0382166101fd5760005461010090046001600160a01b03166108fc82156101cc57826101cf565b30315b6040518115909202916000818181858888f193505050501580156101f7573d6000803e3d6000fd5b50610317565b6000546001600160a01b038084169163a9059cbb91610100909104168315610225578361029b565b60408051600160e01b6370a0823102815230600482015290516001600160a01b038716916370a08231916024808301926020929190829003018186803b15801561026e57600080fd5b505afa158015610282573d6000803e3d6000fd5b505050506040513d602081101561029857600080fd5b50515b6040518363ffffffff1660e01b815260040180836001600160a01b03166001600160a01b0316815260200182815260200192505050602060405180830381600087803b1580156102ea57600080fd5b505af11580156102fe573d6000803e3d6000fd5b505050506040513d602081101561031457600080fd5b50505b5050565b60025481565b6001546001600160a01b0316331461033857600080fd5b600154600080546040516001600160a01b0393841693610100909204909116917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a36001805460008054610100600160a81b0319166101006001600160a01b038416021790556001600160a01b0319169055565b60005461010090046001600160a01b031681565b6103ca84610432565b60029290925560035560045550565b60035481565b60045481565b6001546001600160a01b031681565b60005461010090046001600160a01b0316331461041057600080fd5b600180546001600160a01b0319166001600160a01b0392909216919091179055565b60005460ff161561044257600080fd5b6000805460ff196001600160a01b0390931661010002610100600160a81b03199091161791909116600117905556fea165627a7a72305820b686b79f9f5add5aecc687448786589374eac4460802a5a79013aa990d3b337f0029a165627a7a72305820ccdbb47433fd59b74ce4a83099b0dd2ff1fe8e8bbe7f35802e44c815f0fba8f90029"
 undefined
 > 
-DATA: auctionAbi=[{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"startDate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"auctionOwner","type":"address"},{"name":"_startDate","type":"uint256"},{"name":"_endDate","type":"uint256"},{"name":"_reserve","type":"uint256"}],"name":"init","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"endDate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"reserve","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"}]
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
 undefined
 > 
 > 
@@ -95,7 +113,15 @@ undefined
 > 
 undefined
 > 
-RESULT: ---------- Deploy Group #1 - Factory ----------
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+RESULT: ---------- Deploy Group #1 - Factory & Token ----------
 undefined
 > 
 undefined
@@ -121,37 +147,75 @@ undefined
 ... 
 undefined
 > 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+... 
+...... 
+......... 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+......... 
+...... 
 ... 
 undefined
 > 
-DATA: var factoryAddress="0x57930444aa5c1e758c1407ded001a8f36aa80b1d";
-DATA: var factoryAbi=[{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_minimumFee","type":"uint256"}],"name":"setMinimumFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"minimumFee","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"startDate","type":"uint256"},{"name":"endDate","type":"uint256"},{"name":"reserve","type":"uint256"},{"name":"uiFeeAccount","type":"address"}],"name":"deployAuctionContract","outputs":[{"name":"auction","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"numberOfChildren","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"children","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAddress","type":"address"}],"name":"deprecateFactory","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isChild","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_newAddress","type":"address"}],"name":"FactoryDeprecated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"oldFee","type":"uint256"},{"indexed":false,"name":"newFee","type":"uint256"}],"name":"MinimumFeeUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"auction","type":"address"},{"indexed":false,"name":"startDate","type":"uint256"},{"indexed":false,"name":"endDate","type":"uint256"},{"indexed":false,"name":"reserve","type":"uint256"},{"indexed":false,"name":"uiFeeAccount","type":"address"},{"indexed":false,"name":"ownerFee","type":"uint256"},{"indexed":false,"name":"uiFee","type":"uint256"}],"name":"AuctionDeployed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"}];
+... 
+undefined
+> 
+DATA: var factoryAddress="0x1aa3ebfd892954f32a37b698673505d1dafef4f5";
+DATA: var factoryAbi=[{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_minimumFee","type":"uint256"}],"name":"setMinimumFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"minimumFee","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"numberOfChildren","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"children","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"startDate","type":"uint256"},{"name":"endDate","type":"uint256"},{"name":"reserve","type":"uint256"},{"name":"uiFeeAccount","type":"address"}],"name":"deployAuctionContract","outputs":[{"name":"auction","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAddress","type":"address"}],"name":"deprecateFactory","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isChild","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_newAddress","type":"address"}],"name":"FactoryDeprecated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"oldFee","type":"uint256"},{"indexed":false,"name":"newFee","type":"uint256"}],"name":"MinimumFeeUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"auction","type":"address"},{"indexed":true,"name":"token","type":"address"},{"indexed":false,"name":"startDate","type":"uint256"},{"indexed":false,"name":"endDate","type":"uint256"},{"indexed":false,"name":"reserve","type":"uint256"},{"indexed":false,"name":"uiFeeAccount","type":"address"},{"indexed":false,"name":"ownerFee","type":"uint256"},{"indexed":false,"name":"uiFee","type":"uint256"}],"name":"AuctionDeployed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"}];
 DATA: var factory=eth.contract(factoryAbi).at(factoryAddress);
+DATA: var tokenAddress="0xe00ccdd988b1395489290c4c22e85a9c989f40f6";
+DATA: var tokenAbi=[{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"},{"name":"data","type":"bytes"}],"name":"approveAndCall","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"},{"name":"spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"fixedSupply","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"tokenOwner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Approval","type":"event"}];
+DATA: var token=eth.contract(tokenAbi).at(tokenAddress);
 RESULT:  # Account                                             EtherBalanceChange                          Token Name
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.005372585000000000           0.000000000000000000 Miner
-RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.005372585000000000           0.000000000000000000 Deployer
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.011183610000000000           0.000000000000000000 Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.011183610000000000     1000000.000000000000000000 Deployer
 RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 User1
 RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 User2
 RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 User3
 RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 UI Fee Account
-RESULT:  6 0x57930444aa5c1e758c1407ded001a8f36aa80b1d        0.000000000000000000           0.000000000000000000 Factory
+RESULT:  6 0x1aa3ebfd892954f32a37b698673505d1dafef4f5        0.000000000000000000           0.000000000000000000 Factory
+RESULT:  7 0xe00ccdd988b1395489290c4c22e85a9c989f40f6        0.000000000000000000           0.000000000000000000 Token 'DAI' 'Dai Stablecoin v1.0'
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:                                                                                     0.000000000000000000 Total Token Balances
+RESULT:                                                                               1000000.000000000000000000 Total Token Balances
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 RESULT: 
 undefined
 > 
-RESULT: PASS Deploy Group #1 - Factory - Factory
+RESULT: PASS Deploy Group #1 - Factory & Token - Factory
 1
 > 
-RESULT: factoryTx status=0x1 Success gas=4000000 gasUsed=1074517 costETH=0.005372585 costUSD=0.73018802735 @ ETH/USD=135.91 gasPrice=5 gwei block=970 txIx=0 txId=0xebf7d01fbd61b6454e28a3547a9a8119c7bc299abd28148bad8166d01520df2b @ 1554778034 Tue, 09 Apr 2019 02:47:14 UTC
+RESULT: factoryTx status=0x1 Success gas=4000000 gasUsed=1152104 costETH=0.00576052 costUSD=0.7829122732 @ ETH/USD=135.91 gasPrice=5 gwei block=3603 txIx=0 txId=0x95fd89d5a43940d74b568313d9004c2e2a32c2f6829ef6a5f1944928ab228f36 @ 1554780668 Tue, 09 Apr 2019 03:31:08 UTC
 undefined
 > 
 RESULT: 
 undefined
 > 
-RESULT: factoryContractAddress=0x57930444aa5c1e758c1407ded001a8f36aa80b1d
+RESULT: tokenContractAddress=Token 'DAI' 'Dai Stablecoin v1.0':0xe00c
+RESULT: token.owner/new=Deployer:0xa11a/Null:0x0000
+RESULT: token.details='DAI' 'Dai Stablecoin v1.0' 18 dp
+RESULT: token.totalSupply=1000000
+RESULT: token.Transfer 0 #3603 from=Null:0x0000 to=Deployer:0xa11a tokens=1000000
+undefined
+> 
+RESULT: 
+undefined
+> 
+RESULT: factoryContractAddress=0x1aa3ebfd892954f32a37b698673505d1dafef4f5
 RESULT: factory.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 RESULT: factory.newOwner=0x0000000000000000000000000000000000000000
 RESULT: factory.minimumFee=0.1 ETH
@@ -186,11 +250,11 @@ undefined
 ... 
 undefined
 > 
-RESULT: factoryContractAddress=0x57930444aa5c1e758c1407ded001a8f36aa80b1d
-RESULT: get AuctionDeployed 0 #972 {"auction":"0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278","endDate":"1554784034","owner":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","ownerFee":"561728394500000000","reserve":"1000000000000000000","startDate":"1554778634","uiFee":"561728394500000000","uiFeeAccount":"0xa55a151eb00fded1634d27d1127b4be4627079ea"}
+RESULT: factoryContractAddress=0x1aa3ebfd892954f32a37b698673505d1dafef4f5
+RESULT: get AuctionDeployed 0 #3606 {"auction":"0x842dede37bc78e95237fcc921a13fb6909fd1c99","endDate":"1554781269","owner":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","ownerFee":"561728394500000000","reserve":"1000000000000000000","startDate":"1554780969","token":"0xe00ccdd988b1395489290c4c22e85a9c989f40f6","uiFee":"561728394500000000","uiFeeAccount":"0xa55a151eb00fded1634d27d1127b4be4627079ea"}
 undefined
 > 
-RESULT: auctionContract=#1 ["0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278"]
+RESULT: auctionContract=#1 ["0x842dede37bc78e95237fcc921a13fb6909fd1c99"]
 undefined
 > 
 undefined
@@ -203,10 +267,10 @@ undefined
 > 
 undefined
 > 
-DATA: var auctionAddress="0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278";
+DATA: var auctionAddress="0x842dede37bc78e95237fcc921a13fb6909fd1c99";
 undefined
 > 
-DATA: var auctionAbi=[{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"startDate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"auctionOwner","type":"address"},{"name":"_startDate","type":"uint256"},{"name":"_endDate","type":"uint256"},{"name":"_reserve","type":"uint256"}],"name":"init","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"endDate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"reserve","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"}];
+DATA: var auctionAbi=[{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"startDate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"tokens","type":"uint256"}],"name":"bid","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"endDate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"reserve","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"auctionOwner","type":"address"},{"name":"_token","type":"address"},{"name":"_startDate","type":"uint256"},{"name":"_endDate","type":"uint256"},{"name":"_reserve","type":"uint256"}],"name":"init","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"token","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"}];
 undefined
 > 
 DATA: var auction=eth.contract(auctionAbi).at(auctionAddress);
@@ -215,16 +279,17 @@ undefined
 > 
 RESULT:  # Account                                             EtherBalanceChange                          Token Name
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.007651185000000000           0.000000000000000000 Miner
-RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.556355809500000000           0.000000000000000000 Deployer
-RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976       -1.125735389000000000           0.000000000000000000 User1
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.013839725000000000           0.000000000000000000 Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.550544784500000000     1000000.000000000000000000 Deployer
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976       -1.126112904000000000           0.000000000000000000 User1
 RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 User2
 RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 User3
 RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.561728394500000000           0.000000000000000000 UI Fee Account
-RESULT:  6 0x57930444aa5c1e758c1407ded001a8f36aa80b1d        0.000000000000000000           0.000000000000000000 Factory
-RESULT:  7 0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278        0.000000000000000000           0.000000000000000000 Auction start=Invalid Date, end=Invalid Date, reserve=1
+RESULT:  6 0x1aa3ebfd892954f32a37b698673505d1dafef4f5        0.000000000000000000           0.000000000000000000 Factory
+RESULT:  7 0xe00ccdd988b1395489290c4c22e85a9c989f40f6        0.000000000000000000           0.000000000000000000 Token 'DAI' 'Dai Stablecoin v1.0'
+RESULT:  8 0x842dede37bc78e95237fcc921a13fb6909fd1c99        0.000000000000000000           0.000000000000000000 Auction start=Tue, 09 Apr 2019 13:36:09 AEST, end=Tue, 09 Apr 2019 13:41:09 AEST, reserve=1
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:                                                                                     0.000000000000000000 Total Token Balances
+RESULT:                                                                               1000000.000000000000000000 Total Token Balances
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 RESULT: 
 undefined
@@ -232,30 +297,40 @@ undefined
 RESULT: PASS Deploy Group #1 - Deploy Auction - Auction
 1
 > 
-RESULT: deployAuction_1Tx status=0x1 Success gas=2000000 gasUsed=455720 costETH=0.0022786 costUSD=0.309684526 @ ETH/USD=135.91 gasPrice=5 gwei block=972 txIx=0 txId=0x20aacabc335cb4c865ca3d81cc025d4d74e871fcd3942561ea48314c76c60703 @ 1554778036 Tue, 09 Apr 2019 02:47:16 UTC
+RESULT: deployAuction_1Tx status=0x1 Success gas=2000000 gasUsed=531223 costETH=0.002656115 costUSD=0.36099258965 @ ETH/USD=135.91 gasPrice=5 gwei block=3606 txIx=0 txId=0x94b3c859509afc20eb7d7981770fb47d523ac2873397f7936c4afb3bab4488a9 @ 1554780671 Tue, 09 Apr 2019 03:31:11 UTC
 undefined
 > 
 RESULT: 
 undefined
 > 
-RESULT: factoryContractAddress=0x57930444aa5c1e758c1407ded001a8f36aa80b1d
+RESULT: tokenContractAddress=Token 'DAI' 'Dai Stablecoin v1.0':0xe00c
+RESULT: token.owner/new=Deployer:0xa11a/Null:0x0000
+RESULT: token.details='DAI' 'Dai Stablecoin v1.0' 18 dp
+RESULT: token.totalSupply=1000000
+undefined
+> 
+RESULT: 
+undefined
+> 
+RESULT: factoryContractAddress=0x1aa3ebfd892954f32a37b698673505d1dafef4f5
 RESULT: factory.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 RESULT: factory.newOwner=0x0000000000000000000000000000000000000000
 RESULT: factory.minimumFee=0.1 ETH
 RESULT: factory.newAddress=0x0000000000000000000000000000000000000000
 RESULT: factory.numberOfChildren=1
-RESULT: factory.children(0)=0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278
-RESULT: AuctionDeployed 0 #972 {"auction":"0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278","endDate":"1554784034","owner":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","ownerFee":"561728394500000000","reserve":"1000000000000000000","startDate":"1554778634","uiFee":"561728394500000000","uiFeeAccount":"0xa55a151eb00fded1634d27d1127b4be4627079ea"}
+RESULT: factory.children(0)=0x842dede37bc78e95237fcc921a13fb6909fd1c99
+RESULT: AuctionDeployed 0 #3606 {"auction":"0x842dede37bc78e95237fcc921a13fb6909fd1c99","endDate":"1554781269","owner":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","ownerFee":"561728394500000000","reserve":"1000000000000000000","startDate":"1554780969","token":"0xe00ccdd988b1395489290c4c22e85a9c989f40f6","uiFee":"561728394500000000","uiFeeAccount":"0xa55a151eb00fded1634d27d1127b4be4627079ea"}
 undefined
 > 
 RESULT: 
 undefined
 > 
-RESULT: auctionContractAddress=0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278
+RESULT: auctionContractAddress=0x842dede37bc78e95237fcc921a13fb6909fd1c99
 RESULT: auction.owner=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
 RESULT: auction.newOwner=0x0000000000000000000000000000000000000000
-RESULT: auction.startDate=1554778634
-RESULT: auction.endDate=1554784034
+RESULT: auction.token=Token 'DAI' 'Dai Stablecoin v1.0':0xe00c
+RESULT: auction.startDate=Tue, 09 Apr 2019 13:36:09 AEST
+RESULT: auction.endDate=Tue, 09 Apr 2019 13:41:09 AEST
 undefined
 > 
 RESULT: 

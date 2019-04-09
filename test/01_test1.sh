@@ -42,6 +42,7 @@ echo "$DIFFS1" | tee -a $TEST1OUTPUT
 solc_0.5.7 --version | tee -a $TEST1OUTPUT
 
 echo "var factoryOutput=`solc_0.5.7 --allow-paths . --optimize --pretty-json --combined-json abi,bin,interface $FACTORYSOL`;" > $FACTORYJS
+echo "var tokenOutput=`solc_0.5.7 --allow-paths . --optimize --pretty-json --combined-json abi,bin,interface $TOKENSOL`;" > $TOKENJS
 # ../scripts/solidityFlattener.pl --contractsdir=../contracts --mainsol=$TOKENFACTORYSOL --outputsol=$TOKENFACTORYFLATTENED --verbose | tee -a $TEST1OUTPUT
 
 
@@ -52,16 +53,21 @@ fi
 
 geth --verbosity 3 attach $GETHATTACHPOINT << EOF | tee -a $TEST1OUTPUT
 loadScript("$FACTORYJS");
+loadScript("$TOKENJS");
 loadScript("lookups.js");
 loadScript("functions.js");
 
 var factoryAbi = JSON.parse(factoryOutput.contracts["$FACTORYSOL:$FACTORYNAME"].abi);
 var factoryBin = "0x" + factoryOutput.contracts["$FACTORYSOL:$FACTORYNAME"].bin;
-var auctionAbi = JSON.parse(factoryOutput.contracts["$FACTORYSOL:$NAME"].abi);
+var auctionAbi = JSON.parse(factoryOutput.contracts["$FACTORYSOL:$AUCTIONNAME"].abi);
+var tokenAbi = JSON.parse(tokenOutput.contracts["$TOKENSOL:$TOKENNAME"].abi);
+var tokenBin = "0x" + tokenOutput.contracts["$TOKENSOL:$TOKENNAME"].bin;
 
-console.log("DATA: factoryAbi=" + JSON.stringify(factoryAbi));
-console.log("DATA: factoryBin=" + JSON.stringify(factoryBin));
-console.log("DATA: auctionAbi=" + JSON.stringify(auctionAbi));
+// console.log("DATA: factoryAbi=" + JSON.stringify(factoryAbi));
+// console.log("DATA: factoryBin=" + JSON.stringify(factoryBin));
+// console.log("DATA: auctionAbi=" + JSON.stringify(auctionAbi));
+// console.log("DATA: tokenAbi=" + JSON.stringify(tokenAbi));
+// console.log("DATA: tokenBin=" + JSON.stringify(tokenBin));
 
 
 unlockAccounts("$PASSWORD");
@@ -70,7 +76,11 @@ console.log("RESULT: ");
 
 
 // -----------------------------------------------------------------------------
-var deployGroup1Message = "Deploy Group #1 - Factory";
+var deployGroup1Message = "Deploy Group #1 - Factory & Token";
+var symbol="$SYMBOL";
+var name="$NAME";
+var decimals="$DECIMALS";
+var totalSupply=new BigNumber("$TOTALSUPPLY").shift(decimals);
 // -----------------------------------------------------------------------------
 console.log("RESULT: ---------- " + deployGroup1Message + " ----------");
 var factoryContract = web3.eth.contract(factoryAbi);
@@ -92,11 +102,33 @@ var factory = factoryContract.new({from: deployer, data: factoryBin, gas: 400000
     }
   }
 );
+var tokenContract = web3.eth.contract(tokenAbi);
+var tokenTx = null;
+var tokenAddress = null;
+var token = tokenContract.new(symbol, name, decimals, totalSupply, {from: deployer, data: tokenBin, gas: 4000000, gasPrice: defaultGasPrice},
+  function(e, contract) {
+    if (!e) {
+      if (!contract.address) {
+        tokenTx = contract.transactionHash;
+      } else {
+        tokenAddress = contract.address;
+        addAccount(tokenAddress, "Token '" + symbol + "' '" + name + "'");
+        addTokenContractAddressAndAbi(tokenAddress, tokenAbi);
+        addAddressSymbol(tokenAddress, token.symbol());
+        console.log("DATA: var tokenAddress=\"" + tokenAddress + "\";");
+        console.log("DATA: var tokenAbi=" + JSON.stringify(tokenAbi) + ";");
+        console.log("DATA: var token=eth.contract(tokenAbi).at(tokenAddress);");
+      }
+    }
+  }
+);
 while (txpool.status.pending > 0) {
 }
 printBalances();
 failIfTxStatusError(factoryTx, deployGroup1Message + " - Factory");
 printTxData("factoryTx", factoryTx);
+console.log("RESULT: ");
+printTokenContractDetails();
 console.log("RESULT: ");
 printFactoryContractDetails();
 console.log("RESULT: ");
@@ -104,21 +136,21 @@ console.log("RESULT: ");
 
 // -----------------------------------------------------------------------------
 var deployGroup2Message = "Deploy Group #1 - Deploy Auction";
-var startDate = new Date() / 1000 + 600; // 10 minutes
-var endDate = new Date() / 1000 + 6000; // 100 minutes
+var startDate = new Date() / 1000 + 300; // 5 minutes
+var endDate = new Date() / 1000 + 600; // 10 minutes
 var reserve = new BigNumber("1").shift(18);
 var feeInEthers = new BigNumber("1.123456789").shift(18);
 // -----------------------------------------------------------------------------
 console.log("RESULT: ---------- " + deployGroup2Message + " ----------");
-var deployAuction_1Tx = factory.deployAuctionContract(startDate, endDate, reserve, uiFeeAccount, {from: user1, value: feeInEthers, gas: 2000000, gasPrice: defaultGasPrice});
+var deployAuction_1Tx = factory.deployAuctionContract(tokenAddress, startDate, endDate, reserve, uiFeeAccount, {from: user1, value: feeInEthers, gas: 2000000, gasPrice: defaultGasPrice});
 while (txpool.status.pending > 0) {
 }
 var auctionContract = getAuctionContractDeployed();
 console.log("RESULT: auctionContract=#" + auctionContract.length + " " + JSON.stringify(auctionContract));
 var auctionAddress = auctionContract[0];
 var auction = web3.eth.contract(auctionAbi).at(auctionAddress);
-addAccount(auctionAddress, "Auction start=" + new Date(auction.startDate()).toString() +
-  ", end=" + new Date(auction.endDate()).toString() +
+addAccount(auctionAddress, "Auction start=" + new Date(startDate * 1000).toString() +
+  ", end=" + new Date(endDate * 1000).toString() +
   ", reserve=" + auction.reserve().shift(-18));
 addAuctionContractAddressAndAbi(auctionAddress, auctionAbi);
 console.log("DATA: var auctionAddress=\"" + auctionAddress + "\";");
@@ -128,6 +160,8 @@ console.log("DATA: var auction=eth.contract(auctionAbi).at(auctionAddress);");
 printBalances();
 failIfTxStatusError(deployAuction_1Tx, deployGroup2Message + " - Auction");
 printTxData("deployAuction_1Tx", deployAuction_1Tx);
+console.log("RESULT: ");
+printTokenContractDetails();
 console.log("RESULT: ");
 printFactoryContractDetails();
 console.log("RESULT: ");

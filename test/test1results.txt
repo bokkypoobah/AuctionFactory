@@ -11,24 +11,31 @@
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 
 
----------- Deploy Group #1 - Factory ----------
+---------- Deploy Group #1 - Factory & Token ----------
  # Account                                             EtherBalanceChange                          Token Name
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.005372585000000000           0.000000000000000000 Miner
- 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.005372585000000000           0.000000000000000000 Deployer
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.011183610000000000           0.000000000000000000 Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.011183610000000000     1000000.000000000000000000 Deployer
  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 User1
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 User2
  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 User3
  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 UI Fee Account
- 6 0x57930444aa5c1e758c1407ded001a8f36aa80b1d        0.000000000000000000           0.000000000000000000 Factory
+ 6 0x1aa3ebfd892954f32a37b698673505d1dafef4f5        0.000000000000000000           0.000000000000000000 Factory
+ 7 0xe00ccdd988b1395489290c4c22e85a9c989f40f6        0.000000000000000000           0.000000000000000000 Token 'DAI' 'Dai Stablecoin v1.0'
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-                                                                                    0.000000000000000000 Total Token Balances
+                                                                              1000000.000000000000000000 Total Token Balances
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 
-PASS Deploy Group #1 - Factory - Factory
-factoryTx status=0x1 Success gas=4000000 gasUsed=1074517 costETH=0.005372585 costUSD=0.73018802735 @ ETH/USD=135.91 gasPrice=5 gwei block=970 txIx=0 txId=0xebf7d01fbd61b6454e28a3547a9a8119c7bc299abd28148bad8166d01520df2b @ 1554778034 Tue, 09 Apr 2019 02:47:14 UTC
+PASS Deploy Group #1 - Factory & Token - Factory
+factoryTx status=0x1 Success gas=4000000 gasUsed=1152104 costETH=0.00576052 costUSD=0.7829122732 @ ETH/USD=135.91 gasPrice=5 gwei block=3603 txIx=0 txId=0x95fd89d5a43940d74b568313d9004c2e2a32c2f6829ef6a5f1944928ab228f36 @ 1554780668 Tue, 09 Apr 2019 03:31:08 UTC
 
-factoryContractAddress=0x57930444aa5c1e758c1407ded001a8f36aa80b1d
+tokenContractAddress=Token 'DAI' 'Dai Stablecoin v1.0':0xe00c
+token.owner/new=Deployer:0xa11a/Null:0x0000
+token.details='DAI' 'Dai Stablecoin v1.0' 18 dp
+token.totalSupply=1000000
+token.Transfer 0 #3603 from=Null:0x0000 to=Deployer:0xa11a tokens=1000000
+
+factoryContractAddress=0x1aa3ebfd892954f32a37b698673505d1dafef4f5
 factory.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 factory.newOwner=0x0000000000000000000000000000000000000000
 factory.minimumFee=0.1 ETH
@@ -36,38 +43,45 @@ factory.newAddress=0x0000000000000000000000000000000000000000
 factory.numberOfChildren=0
 
 ---------- Deploy Group #1 - Deploy Auction ----------
-factoryContractAddress=0x57930444aa5c1e758c1407ded001a8f36aa80b1d
-get AuctionDeployed 0 #972 {"auction":"0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278","endDate":"1554784034","owner":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","ownerFee":"561728394500000000","reserve":"1000000000000000000","startDate":"1554778634","uiFee":"561728394500000000","uiFeeAccount":"0xa55a151eb00fded1634d27d1127b4be4627079ea"}
-auctionContract=#1 ["0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278"]
+factoryContractAddress=0x1aa3ebfd892954f32a37b698673505d1dafef4f5
+get AuctionDeployed 0 #3606 {"auction":"0x842dede37bc78e95237fcc921a13fb6909fd1c99","endDate":"1554781269","owner":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","ownerFee":"561728394500000000","reserve":"1000000000000000000","startDate":"1554780969","token":"0xe00ccdd988b1395489290c4c22e85a9c989f40f6","uiFee":"561728394500000000","uiFeeAccount":"0xa55a151eb00fded1634d27d1127b4be4627079ea"}
+auctionContract=#1 ["0x842dede37bc78e95237fcc921a13fb6909fd1c99"]
  # Account                                             EtherBalanceChange                          Token Name
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.007651185000000000           0.000000000000000000 Miner
- 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.556355809500000000           0.000000000000000000 Deployer
- 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976       -1.125735389000000000           0.000000000000000000 User1
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.013839725000000000           0.000000000000000000 Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.550544784500000000     1000000.000000000000000000 Deployer
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976       -1.126112904000000000           0.000000000000000000 User1
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 User2
  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 User3
  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.561728394500000000           0.000000000000000000 UI Fee Account
- 6 0x57930444aa5c1e758c1407ded001a8f36aa80b1d        0.000000000000000000           0.000000000000000000 Factory
- 7 0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278        0.000000000000000000           0.000000000000000000 Auction start=Invalid Date, end=Invalid Date, reserve=1
+ 6 0x1aa3ebfd892954f32a37b698673505d1dafef4f5        0.000000000000000000           0.000000000000000000 Factory
+ 7 0xe00ccdd988b1395489290c4c22e85a9c989f40f6        0.000000000000000000           0.000000000000000000 Token 'DAI' 'Dai Stablecoin v1.0'
+ 8 0x842dede37bc78e95237fcc921a13fb6909fd1c99        0.000000000000000000           0.000000000000000000 Auction start=Tue, 09 Apr 2019 13:36:09 AEST, end=Tue, 09 Apr 2019 13:41:09 AEST, reserve=1
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-                                                                                    0.000000000000000000 Total Token Balances
+                                                                              1000000.000000000000000000 Total Token Balances
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 
 PASS Deploy Group #1 - Deploy Auction - Auction
-deployAuction_1Tx status=0x1 Success gas=2000000 gasUsed=455720 costETH=0.0022786 costUSD=0.309684526 @ ETH/USD=135.91 gasPrice=5 gwei block=972 txIx=0 txId=0x20aacabc335cb4c865ca3d81cc025d4d74e871fcd3942561ea48314c76c60703 @ 1554778036 Tue, 09 Apr 2019 02:47:16 UTC
+deployAuction_1Tx status=0x1 Success gas=2000000 gasUsed=531223 costETH=0.002656115 costUSD=0.36099258965 @ ETH/USD=135.91 gasPrice=5 gwei block=3606 txIx=0 txId=0x94b3c859509afc20eb7d7981770fb47d523ac2873397f7936c4afb3bab4488a9 @ 1554780671 Tue, 09 Apr 2019 03:31:11 UTC
 
-factoryContractAddress=0x57930444aa5c1e758c1407ded001a8f36aa80b1d
+tokenContractAddress=Token 'DAI' 'Dai Stablecoin v1.0':0xe00c
+token.owner/new=Deployer:0xa11a/Null:0x0000
+token.details='DAI' 'Dai Stablecoin v1.0' 18 dp
+token.totalSupply=1000000
+
+factoryContractAddress=0x1aa3ebfd892954f32a37b698673505d1dafef4f5
 factory.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 factory.newOwner=0x0000000000000000000000000000000000000000
 factory.minimumFee=0.1 ETH
 factory.newAddress=0x0000000000000000000000000000000000000000
 factory.numberOfChildren=1
-factory.children(0)=0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278
-AuctionDeployed 0 #972 {"auction":"0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278","endDate":"1554784034","owner":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","ownerFee":"561728394500000000","reserve":"1000000000000000000","startDate":"1554778634","uiFee":"561728394500000000","uiFeeAccount":"0xa55a151eb00fded1634d27d1127b4be4627079ea"}
+factory.children(0)=0x842dede37bc78e95237fcc921a13fb6909fd1c99
+AuctionDeployed 0 #3606 {"auction":"0x842dede37bc78e95237fcc921a13fb6909fd1c99","endDate":"1554781269","owner":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","ownerFee":"561728394500000000","reserve":"1000000000000000000","startDate":"1554780969","token":"0xe00ccdd988b1395489290c4c22e85a9c989f40f6","uiFee":"561728394500000000","uiFeeAccount":"0xa55a151eb00fded1634d27d1127b4be4627079ea"}
 
-auctionContractAddress=0x3f3d4dfe43dff83befbd6e2c0bf41e9e5b287278
+auctionContractAddress=0x842dede37bc78e95237fcc921a13fb6909fd1c99
 auction.owner=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
 auction.newOwner=0x0000000000000000000000000000000000000000
-auction.startDate=1554778634
-auction.endDate=1554784034
+auction.token=Token 'DAI' 'Dai Stablecoin v1.0':0xe00c
+auction.startDate=Tue, 09 Apr 2019 13:36:09 AEST
+auction.endDate=Tue, 09 Apr 2019 13:41:09 AEST
 

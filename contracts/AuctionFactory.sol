@@ -86,15 +86,21 @@ contract Owned {
 contract Auction is Owned {
     using SafeMath for uint;
 
+    address public token;
     uint public startDate;
     uint public endDate;
     uint public reserve;
 
-    function init(address auctionOwner, uint _startDate, uint _endDate, uint _reserve) public {
+    function init(address auctionOwner, address _token, uint _startDate, uint _endDate, uint _reserve) public {
         super.init(auctionOwner);
+        token = _token;
         startDate = _startDate;
         endDate = _endDate;
         reserve = _reserve;
+    }
+
+    function bid(uint tokens) public {
+        require(ERC20Interface(token).transferFrom(msg.sender, address(this), tokens));
     }
 
 }
@@ -109,7 +115,7 @@ contract AuctionFactory is Owned {
 
     event FactoryDeprecated(address _newAddress);
     event MinimumFeeUpdated(uint oldFee, uint newFee);
-    event AuctionDeployed(address indexed owner, address indexed auction, uint startDate, uint endDate, uint reserve, address uiFeeAccount, uint ownerFee, uint uiFee);
+    event AuctionDeployed(address indexed owner, address indexed auction, address indexed token, uint startDate, uint endDate, uint reserve, address uiFeeAccount, uint ownerFee, uint uiFee);
 
     constructor () public {
         super.init(msg.sender);
@@ -128,6 +134,7 @@ contract AuctionFactory is Owned {
     }
 
     function deployAuctionContract(
+        address token,
         uint startDate,
         uint endDate,
         uint reserve,
@@ -135,11 +142,12 @@ contract AuctionFactory is Owned {
     ) public payable returns (
         Auction auction
     ) {
+        // require(ERC20Interface(token).totalSupply() > 0);
         require(msg.value >= minimumFee);
         require(startDate >= now);
         require(endDate > startDate);
         auction = new Auction();
-        auction.init(msg.sender, startDate, endDate, reserve);
+        auction.init(msg.sender, token, startDate, endDate, reserve);
         isChild[address(auction)] = true;
         children.push(address(auction));
         uint uiFee;
@@ -157,7 +165,7 @@ contract AuctionFactory is Owned {
         if (ownerFee > 0) {
             owner.transfer(ownerFee);
         }
-        emit AuctionDeployed(owner, address(auction), startDate, endDate, reserve, uiFeeAccount, ownerFee, uiFee);
+        emit AuctionDeployed(owner, address(auction), token, startDate, endDate, reserve, uiFeeAccount, ownerFee, uiFee);
    }
     function () external payable {
         revert();

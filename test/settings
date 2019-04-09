@@ -6,7 +6,18 @@ SOURCEDIR=../contracts/
 FACTORYNAME=AuctionFactory
 FACTORYSOL=AuctionFactory.sol
 FACTORYJS=AuctionFactory.js
-NAME=Auction
+
+AUCTIONNAME=Auction
+
+TOKENNAME=FixedSupplyToken
+TOKENSOL=test/FixedSupplyToken.sol
+TOKENJS=FixedSupplyToken.js
+
+SYMBOL=DAI
+NAME="Dai Stablecoin v1.0"
+DECIMALS=18
+TOTALSUPPLY=1000000
+
 
 DEPLOYMENTDATA=deploymentData.js
 
